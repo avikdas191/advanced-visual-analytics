@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "hconcat": [{"mark": {"type": "bar"}, "encoding": {"color": {"aggregate": "count", "scale": {"range": ["#7b3294", "#c2a5cf", "#f7f7f7", "#a6dba0", "#008837"], "type": "quantize"}, "type": "quantitative"}, "tooltip": [{"aggregate": "count", "type": "quantitative"}], "x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"bin": {"maxbins": 20}, "field": "IMDB_Rating", "type": "quantitative"}}}, {"mark": {"type": "bar"}, "encoding": {"color": {"aggregate": "count", "scale": {"range": ["#eff3ff", "#bdd7e7", "#6baed6", "#3182bd", "#08519c"], "type": "quantize"}, "type": "quantitative"}, "tooltip": [{"aggregate": "count", "type": "quantitative"}], "x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"bin": {"maxbins": 20}, "field": "IMDB_Rating", "type": "quantitative"}}}], "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/movies.json"}, "resolve": {"scale": {"color": "independent"}}, "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json"};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
